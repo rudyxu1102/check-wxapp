@@ -1,0 +1,6 @@
+<view class="home">
+  <navigator wx:for="{{workList}}" wx:key="index" url="/pages/home/check-device/index" class="home-item">
+    <text class="item-title">{{item.content}}</text>
+    <text class="item-desc">{{item.status === 1 ? '完成' : '未完成'}}</text>
+  </navigator>
+</view>

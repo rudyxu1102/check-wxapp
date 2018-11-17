@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="home-item">
+    <text class="item-title">检查标准</text>
+    <text class="item-desc">xxxxx</text>
+  </view>
+  <view class="home-item">
+    <text class="item-title">检查情况</text>
+    <input class="item-desc" value="hahah" placeholder="请输入检查情况"></input>
+  </view>
+  <view class="footer-btn">完成</view>
+</view>

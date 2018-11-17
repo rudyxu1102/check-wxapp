@@ -1,0 +1,41 @@
+.home {
+  padding-top: 30rpx;
+  text-align: center;
+  background: #f6f6f6;
+  height: 100%;
+}
+
+.home-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0 48rpx 0 48rpx;
+  width: 100%;
+  height: 110rpx;
+  line-height: 110rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.home-item:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 48rpx;
+  right: 48rpx;
+  height: 2rpx;
+  background: #ccc;
+}
+
+.item-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #222;
+}
+
+.item-desc {
+  font-size: 28rpx;
+  color: #555;
+}

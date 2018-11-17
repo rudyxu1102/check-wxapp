@@ -1,0 +1,52 @@
+/* pages/usercenter/myAccount/myAccount.wxss */
+page{
+    background: #f6f6f6;
+}
+.user-center-options {
+    margin-top: 24rpx;
+    padding:0 48rpx;
+    width: 100%;
+    background: #fff;
+    box-sizing:border-box;
+}
+
+.operate {
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 80rpx;
+    padding-right: 47rpx;
+    height: 140rpx;
+    line-height: 140rpx;
+    width: 100%;
+    font-size:32rpx;
+    color:rgba(34,34,34,1);
+}
+
+.operate .left-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);    
+    display: inline-block;
+    width: 44rpx;
+    height: 44rpx;
+    background-size:cover;
+}
+
+.operate .right-icon {
+    position: absolute;
+    right:0;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    display: inline-block;
+    width:44rpx;
+    height:44rpx;
+    background-size:cover;
+}
+
+.operate-name {
+    height: 100%;
+    line-height: 80rpx;    
+}

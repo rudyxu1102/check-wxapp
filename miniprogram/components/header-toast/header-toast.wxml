@@ -1,0 +1,4 @@
+<!--components/headerToast/headerToast.wxml-->
+<view class="header-toast {{isShow ? 'toast-visible' : 'toast-hidden'}}">
+    <view class="header-content">{{title}}</view>
+</view>

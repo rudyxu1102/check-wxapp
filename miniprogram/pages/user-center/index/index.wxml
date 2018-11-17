@@ -1,0 +1,40 @@
+<!--pages/creation/usercenter/usercenter.wxml-->
+<view class="user-center" style="background-image:url({{resDomain + 'manage/userInfoBg.jpg'}})">
+  <view class="user-center-info">
+    <view class="user-image">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view class="user-info">
+      <view class="user-name">
+        <open-data type="userNickName"></open-data>
+      </view>
+    </view>
+  </view>
+  <view class="user-center-options">
+    <navigator class="operate" url='/pages/user-center/login/index'>
+      <icon class="left-icon" style="background-image:url({{resDomain + 'manage/change-account.png'}})"></icon>
+      <text class="operate-name">切换账号</text>
+      <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
+    </navigator>
+    <navigator class="operate" url='/pages/user-center/change-password/index'>
+      <icon class="left-icon" style="background-image:url({{resDomain + 'manage/my-order.png'}})"></icon>
+      <text class="operate-name">修改密码</text>
+      <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
+    </navigator>
+    <navigator class="operate" url='/pages/user-center/spot-manage/index/index'>
+      <icon class="left-icon" style="background-image:url({{resDomain + 'manage/acocuntManage.png'}})"></icon>
+      <text class="operate-name">点检管理</text>
+      <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
+    </navigator>
+    <navigator class="operate" url='/pages/user-center/user-manage/index/index'>
+      <icon class="left-icon" style="background-image:url({{resDomain + 'manage/bought-template.png'}})"></icon>
+      <text class="operate-name">用户管理</text>
+      <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
+    </navigator>
+        <view class="operate">
+      <icon class="left-icon" style="background-image:url({{resDomain + 'manage/quit.png'}})"></icon>
+      <text class="operate-name">退出登录</text>
+      <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
+    </view>
+  </view>
+</view>

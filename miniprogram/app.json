@@ -1,19 +1,52 @@
 {
   "cloud": true,
   "pages": [
-    "pages/index/index",
+    "pages/home/index/index",
+    "pages/demo/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
     "pages/addFunction/addFunction",
     "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib"
+    "pages/chooseLib/chooseLib",
+    "pages/spot-check/index/index",
+    "pages/user-center/index/index",
+    "pages/user-center/login/index",
+    "pages/user-center/spot-manage/index/index",
+    "pages/user-center/user-manage/index/index",
+    "pages/home/check-device/index",
+    "pages/user-center/change-password/index",
+    "pages/spot-check/check-view/index",
+    "pages/user-center/user-manage/user-add/index"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "点检",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 100
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
+        "iconPath": "images/manage.png",
+        "selectedIconPath": "images/s_manage.png",
+        "text": "今日任务"
+      },
+      {
+        "pagePath": "pages/spot-check/index/index",
+        "iconPath": "images/idea.png",
+        "selectedIconPath": "images/s_idea.png",
+        "text": "查看点检"
+      },
+      {
+        "pagePath": "pages/user-center/index/index",
+        "iconPath": "images/creation.png",
+        "selectedIconPath": "images/s_creation.png",
+        "text": "个人中心"
+      }
+    ],
+    "color": "#777",
+    "selectedColor": "#4a68ec"
   }
 }
