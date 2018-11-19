@@ -9,3 +9,5 @@
   </view>
   <button class="faiscoLoginBtn" bindtap='onLogin'> 登录 </button>
 </view>
+
+<header-toast isShow="{{isShowTip}}" title="{{tip}}"></header-toast>

@@ -1,66 +1,62 @@
 // miniprogram/pages/user-center/user-manage/user-add/index.js
-Page({
+let md5 = require('../../../../utils/util.js').md5;
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-
+    resDomain: 'https://cd.faisys.com/image/wcdWxApp/',
+    username: '',
+    password: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  toUsernameBlur: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      username: value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toPasswordBlur: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      password: value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  addUser: function () {
+    let password = md5(this.data.password);
+    let username = this.data.username;
+    if (!username) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入登录账号'
+      })
+      return
+    }
+    if (!password) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入登录密码'
+      })
+      return
+    }
+    const db = wx.cloud.database();
+    db.collection('user').add({
+      data: {
+        password: password,
+        account: username
+      },
+      success: res => {
+        wx.showToast({
+          title: '添加用户成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '添加失败'
+        })
+      }
+    })
   }
 })

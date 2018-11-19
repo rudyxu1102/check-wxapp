@@ -1,67 +1,73 @@
 // miniprogram/pages/user-center/login/index.js
+let md5 = require('../../../utils/util.js').md5;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    resDomain: 'https://cd.faisys.com/image/wcdWxApp/'
-
+    resDomain: 'https://cd.faisys.com/image/wcdWxApp/',
+    username: '',
+    password: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  toUsernameBlur: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      username: value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toPasswordBlur: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      password: value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onLogin: function () {
+    let account = this.data.username;
+    let password = md5(this.data.password);
+    if (!account) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入登录账号'
+      })
+      return
+    }
+    if (!password) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入登录密码'
+      })
+      return
+    }
+    let that = this;
+    const db = wx.cloud.database();
+    console.log(account, password)
+    db.collection('user').where({
+      account: account,
+      password: password
+    }).get({
+      success: res => {
+        if (res.data.length > 0) {
+          wx.setStorageSync('userId', res.data[0]._id);
+          wx.setStorageSync('isLogin', true);  
+          wx.showToast({
+            icon: 'success',
+            title: '登录成功'
+          })        
+        } else {
+          that.setData({
+            isShowTip: true,
+            tip: '请输入正确的账号和密码'
+          })
+        }
+      },
+      fail: err => {
+        that.setData({
+          isShowTip: true,
+          tip: '登录失败'
+        })
+      }
+    })
   }
 })

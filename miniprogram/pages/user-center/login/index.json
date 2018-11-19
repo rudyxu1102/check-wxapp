@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "登录"
+  "navigationBarTitleText": "登录",
+  "usingComponents": {
+    "header-toast": "/components/header-toast/header-toast"
+  }
 }

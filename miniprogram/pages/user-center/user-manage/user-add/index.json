@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "添加用户",
+  "usingComponents": {
+    "header-toast": "/components/header-toast/header-toast"
+  }
+}
