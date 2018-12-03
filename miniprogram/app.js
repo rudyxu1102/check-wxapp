@@ -7,21 +7,30 @@ App({
       env: isDebug ? 'test-644476' : 'demo-5cdb02',
       traceUser: true
     })
+    this.getOpenid();
+  },
+  globalData: {
+
+  },
+  getOpenid: function () {
+    let hasOpenid = !!wx.getStorageSync('openid');
+    if (hasOpenid) {
+      return
+    }
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
-        this.globalData.openid = res.result.openid
+        wx.setStorageSync('openid', res.result.openid);
+        this.globalData.openid = res.result.openid;
+        console.log(res.result.openid)
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '获取 openid',
+          title: '获取openid失败',
         })
       }
     })
-  },
-  globalData: {
-
   }
 })

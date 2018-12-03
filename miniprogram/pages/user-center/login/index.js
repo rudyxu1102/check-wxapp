@@ -49,12 +49,13 @@ Page({
     }).get({
       success: res => {
         if (res.data.length > 0) {
-          wx.setStorageSync('userId', res.data[0]._id);
-          wx.setStorageSync('isLogin', true);  
-          wx.showToast({
-            icon: 'success',
-            title: '登录成功'
-          })        
+          wx.setStorageSync('loginInfo', {
+            userId: res.data[0]._id,
+            account: account
+          });  
+          wx.navigateTo({
+            url: '/pages/home/index/index',
+          })     
         } else {
           that.setData({
             isShowTip: true,

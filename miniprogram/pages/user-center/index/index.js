@@ -1,4 +1,6 @@
 // miniprogram/pages/user-center/index/index.js
+let globalData = getApp().globalData;
+
 Page({
 
   /**
@@ -12,55 +14,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getUserInfo();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-
+    this.getUserInfo();
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 获取账户信息 
+  getUserInfo: function () {
+    const db = wx.cloud.database();
+    let loginInfo = wx.getStorageSync('loginInfo');
+    if (!loginInfo) {
+      wx.navigateTo({
+        url: '/pages/user-center/login/index',
+      })
+      return
+    }
+    let userId = loginInfo.userId;
+    db.collection('user').doc(userId).get({
+      success: res => {
+        this.setData({
+          account: res.data.account
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+      }
+    })
   }
 })

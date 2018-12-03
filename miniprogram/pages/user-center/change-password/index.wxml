@@ -1,12 +1,14 @@
 <view class="loginPage">
   <view class="section inputSection">
     <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
-    <input placeholder="请输入密码" value="{{password}}" type="password" bindinput="toPasswordBlur" />
+    <input placeholder="请输入密码" value="{{password}}" type="{{showPas ? 'text' : 'password'}}" bindinput="toFirstPasBlur" />
     <view class='inputRightIcon' style="background-image:url({{showPas ? resDomain + '/seeing.png' : resDomain + '/see.png'}});opacity: {{showPas ? 1 : 0.1}}" catchtap='toggleShowPas'></view>
   </view>
   <view class="section inputSection">
     <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
-    <input placeholder="请再次输入密码" value="{{password}}" type="password" bindinput="toPasswordBlur" />
+    <input placeholder="请再次输入密码" value="{{password}}" type="{{showPas ? 'text' : 'password'}}" bindinput="toSecPasBlur" />
   </view>
-  <button class="faiscoLoginBtn" bindtap='onLogin'> 登录 </button>
+  <button class="faiscoLoginBtn" bindtap='changePas'> 确认 </button>
 </view>
+
+<header-toast isShow="{{isShowTip}}" title="{{tip}}"></header-toast>
