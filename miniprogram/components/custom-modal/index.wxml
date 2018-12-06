@@ -1,0 +1,12 @@
+<!--components/customModal/customModal.wxml-->
+<view class="custom-modal-container {{modalShowClass}}">
+    <view class="custom-modal-mask" catchtap="hideModal"></view>
+    <view class="custom-modal-content" style="padding: {{padding}}">
+        <slot name="modal-header"></slot>    
+        <slot name="modal-content"></slot>
+        <view class="modal-footer" style="{{footerStyle}}">
+            <slot name="cancel-btn" class="footer-btn" catchtap="cancelCabk"></slot>
+            <slot name="confirm-btn" class="footer-btn" catchtap="confirmCabk"></slot>            
+        </view>
+    </view>
+</view>

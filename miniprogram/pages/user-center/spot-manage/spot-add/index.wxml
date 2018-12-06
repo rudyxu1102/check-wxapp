@@ -1,0 +1,37 @@
+<!--miniprogram/pages/user-center/spot-manage/spot-add/index.wxml-->
+<view class="container">
+  <view class="home-item">
+    <text class="item-title">点检设备</text>
+    <input class="item-desc" placeholder="请输入点检的设备" bindblur='changeInput' key="device"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检要素</text>
+    <input class="item-desc" placeholder="请输入点检要素" bindblur='changeInput' key="factor"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检方法</text>
+    <input class="item-desc" placeholder="请输入点检方法" bindblur='changeInput' key="method"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检类型</text>
+    <input class="item-desc" placeholder='请选择点检类型'  bindblur='changeInput' key="type"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检标准</text>
+    <input class="item-desc" placeholder='请输入点检标准'  bindblur='changeInput' key="standard"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检周期</text>
+    <input class="item-desc" placeholder="请输入点检周期" bindblur='changeInput' key="cycle"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">点检开始日期</text>
+    <input class="item-desc" placeholder="请输入点检开始日期" bindblur='changeInput' key="startDate"></input>
+  </view>
+  <view class="home-item">
+    <text class="item-title">上传检查图片</text>
+    <switch checked="{{imgUpload}}" class="right-switch" color="#3164FF" bindchange="switchChange"/>
+  </view>
+    
+  <view class="footer-btn">完成</view>
+</view>

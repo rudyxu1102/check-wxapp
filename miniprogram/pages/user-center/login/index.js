@@ -50,12 +50,13 @@ Page({
       success: res => {
         if (res.data.length > 0) {
           wx.setStorageSync('loginInfo', {
-            userId: res.data[0]._id,
-            account: account
+            userId: res.data[0]._id
           });  
-          wx.navigateTo({
+          
+          wx.switchTab({
             url: '/pages/home/index/index',
-          })     
+          })
+               
         } else {
           that.setData({
             isShowTip: true,

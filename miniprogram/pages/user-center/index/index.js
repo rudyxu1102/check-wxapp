@@ -35,7 +35,8 @@ Page({
     db.collection('user').doc(userId).get({
       success: res => {
         this.setData({
-          account: res.data.account
+          account: res.data.account,
+          username: res.data.username
         })
       },
       fail: err => {
@@ -44,6 +45,29 @@ Page({
           title: '查询记录失败'
         })
       }
+    })
+  },
+
+  // 退出登录 
+  quitOut: function () {
+    this.setData({
+      isShowModal: true
+    })
+  },
+
+  hideModal: function () {
+    this.setData({
+      isShowModal: false
+    })
+  },
+
+  confirmQuit: function () {
+    this.setData({
+      isShowModal: false
+    })
+    wx.clearStorage();
+    wx.navigateTo({
+      url: '/pages/user-center/login/index',
     })
   }
 })

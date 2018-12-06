@@ -1,11 +1,19 @@
 <view class="loginPage">
   <view class="section inputSection">
     <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
-    <input placeholder="请输入帐号" value="{{username}}" type="text" bindinput="toUsernameBlur" focus/>
+    <input placeholder="用户帐号" value="{{account}}" type="text" bindblur="toAccountBlur" focus="{{!accountCanUse}}"/>
+  </view>
+  <view class="section inputSection">
+    <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
+    <input placeholder="用户名称" value="{{username}}" type="text" bindblur="toUsernameBlur" focus/>
   </view>
   <view class="section inputSection">
     <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
-    <input placeholder="请输入密码" value="{{password}}" type="text" bindinput="toPasswordBlur" />
+    <input placeholder="登录密码" value="{{password}}" type="password" bindblur="toPasswordBlur" />
+  </view>
+  <view class="section inputSection">
+    <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
+    <input placeholder="请再次输入登录密码" value="{{secPas}}" type="password" bindblur="toSecPasswordBlur" />
   </view>
   <button class="faiscoLoginBtn" bindtap='addUser'> 注册 </button>
 </view>

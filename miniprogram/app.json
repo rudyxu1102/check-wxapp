@@ -17,7 +17,8 @@
     "pages/home/check-device/index",
     "pages/user-center/change-password/index",
     "pages/spot-check/check-view/index",
-    "pages/user-center/user-manage/user-add/index"
+    "pages/user-center/user-manage/user-add/index",
+    "pages/user-center/spot-manage/spot-add/index"
   ],
   "window": {
     "navigationBarTitleText": "点检",

@@ -100,3 +100,41 @@
     height: 100%;
     line-height: 80rpx;    
 }
+
+
+.tip-content {
+    margin-top: 70rpx;
+    margin-bottom: 70rpx;
+    font-size:32rpx;
+    font-weight:500;
+    color: #222222;
+}
+
+.cancel-tip-btn {
+    position: relative;
+    width: 50%;
+    height: 88rpx;
+    font-size:32rpx;
+    font-weight:500;
+    line-height:88rpx;
+    color: #888888;
+}
+
+.cancel-tip-btn::after {
+    content: '';
+    position: absolute;
+    right: -1rpx;
+    top: 0;
+    bottom: 0;
+    background: #E6E6E6;
+    width: 1rpx;
+}
+
+.think-tip-btn {
+    width: 50%;
+    height: 88rpx;
+    font-size:32rpx;
+    font-weight:500;
+    line-height:88rpx;
+    color: #3164FF;
+}

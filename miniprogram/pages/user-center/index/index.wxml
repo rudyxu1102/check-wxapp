@@ -6,7 +6,7 @@
     </view>
     <view class="user-info">
       <view class="user-name">
-        <open-data type="userNickName"></open-data>
+        <view>{{username}}</view>
         <view class="user-account">帐号：{{account}}</view>
       </view>
     </view>
@@ -32,10 +32,17 @@
       <text class="operate-name">用户管理</text>
       <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
     </navigator>
-        <view class="operate">
+    <view class="operate" catchtap="quitOut">
       <icon class="left-icon" style="background-image:url({{resDomain + 'manage/quit.png'}})"></icon>
       <text class="operate-name">退出登录</text>
       <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
     </view>
   </view>
 </view>
+
+<!-- 弹窗 -->
+<custom-modal isShow="{{isShowModal}}" footerStyle="border-top: 1rpx solid #E6E6E6">
+    <view slot="modal-content" class="tip-content">是否退出登录</view>
+    <view slot="cancel-btn" class="cancel-tip-btn" bindtap="hideModal">取消</view>    
+    <view slot="confirm-btn" class="think-tip-btn" bindtap="confirmQuit">确定</view>
+</custom-modal>

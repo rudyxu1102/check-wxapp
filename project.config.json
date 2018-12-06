@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -52,6 +52,12 @@
 					"id": -1,
 					"name": "home",
 					"pathName": "pages/home/check-device/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user-center",
+					"pathName": "pages/user-center/spot-manage/spot-add/index",
 					"query": ""
 				}
 			]
