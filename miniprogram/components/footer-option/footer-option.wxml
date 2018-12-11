@@ -1,0 +1,9 @@
+<!--components/footerOption/footerOption.wxml-->
+<view class="footer-option-container {{isShow ? 'mask-visilble' : 'mask-hidden'}}">
+    <view class="footer-option__mask" bindtap="closeModal"></view>
+    <view class="footer-option__content {{isShow ? 'modal-visilble' : 'modal-hidden'}}" style="padding-bottom: {{isIphoneX ? '20rpx' : '0'}}">
+        <slot name="header"></slot>
+        <slot name="middle"></slot>
+        <slot name="footer"></slot>
+    </view>
+</view>

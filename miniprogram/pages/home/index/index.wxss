@@ -28,7 +28,9 @@
   height: 2rpx;
   background: #ccc;
 }
-
+.home-item:last-child:after {
+  display: none;
+}
 .item-title {
   font-size: 32rpx;
   font-weight: bold;

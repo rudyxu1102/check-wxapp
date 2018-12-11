@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    checkType: 0,
+    options: [{
+      id: 0,
+      value: ''
+    }]
   },
 
   /**
@@ -13,54 +17,124 @@ Page({
    */
   onLoad: function (options) {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  openPicker: function () {
+    this.setData({
+      isShowFooter: true
+    })
+  },
+  hidePicker: function () {
+    this.setData({
+      isShowFooter: false,
+      // curPickerVal: this.data.element && [this.data.element.submitScope]
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  confirmPicker: function () {
+    this.setData({
+      isShowFooter: false,
+      // [`element.submitScope`]: this.data.curPickerVal[0]
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  // 提交范围的picker
+  bindPickerChange: function (e) {
+    let value = e.detail.value;
+    this.setData({
+      checkType: value[0]
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  // 添加单选的选项
+  addRadioOpt: function () {
+    if (this.data.options) {
+      let length = this.data.options.length;
+      let obj = {
+        id: this.data.options[length - 1].id + 1,
+        value: ''
+      };
+      this.setData({
+        [`options[${length}]`]: obj
+      })
+    }
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+  // 删除单选的选项
+  delRadioOpt: function (e) {
+    let index = parseInt(e.target.dataset.index);
+    let arr = this.data.options.slice();
+    arr.splice(index, 1);
+    this.setData({
+      ['options']: arr
+    })
+  },
+  updateRadioOpt: function (e) {
+    let value = e.detail.value;
+    let index = parseInt(e.target.dataset.index);
+    this.setData({
+      [`options[${index}].value`]: value
+    })
+  },
+  bindDateChange: function (e) {
+    this.setData({
+      startDate: e.detail.value
+    })
+  },
+  changeInput: function (e) {
+    let value = e.detail.value;
+    let key = e.target.dataset.key;
+    let checkType = this.data.checkType;
 
+    if (checkType === 1 && key === 'standard') {
+      return
+    }
+    if (key === 'cycle') {
+      let num = /\d*/.exec(value)[0];
+      value = num;
+    }
+    this.setData({
+      [key]: value
+    })
+  },
+  changeSwitch: function (e) {
+    let value = e.detail;
+    let key = e.target.dataset.key;
+    this.setData({
+      [key]: value
+    })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  addCycleWork: function () {
+    let standard = this.data.standard;
+    if (this.data.checkType === 1) {
+      let options = this.data.options;
+      standard = JSON.stringify(options);
+    }
+    let result = {
+      device: this.data.device,
+      factor: this.data.factor,
+      method: this.data.method,
+      type: this.data.checkType,
+      standard: standard,
+      cycle: this.data.cycle,
+      startDate: this.data.startDate,
+      imgUpload: this.data.imgUpload
+    }
+    const db = wx.cloud.database()
+    db.collection('cycleWork').add({
+      data: result,
+      success: res => {
+        wx.showToast({
+          title: '新增点检成功',
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          image: '/images/error.png',
+          title: '新增点检失败'
+        })
+      }
+    })
   }
 })

@@ -8,9 +8,24 @@ App({
       traceUser: true
     })
     this.getOpenid();
+    this.testTimer();
   },
   globalData: {
 
+  },
+  testTimer: function () {
+    wx.cloud.callFunction({
+      name: 'test',
+      data: {
+        isDebug: isDebug
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
   },
   getOpenid: function () {
     let hasOpenid = !!wx.getStorageSync('openid');

@@ -1,0 +1,68 @@
+/* components/listItem/list-item.wxss */
+.list-item-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 48rpx;    
+    line-height: 110rpx;
+    background: #fff;
+}
+
+.bottom-border:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 48rpx;
+    right: 48rpx;
+    height: 2rpx;
+    background: #F3F3F3;
+}
+
+.top-border:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 48rpx;
+    right: 48rpx;
+    height: 2rpx;
+    background: #F3F3F3;
+}
+
+.list-item-container__name {
+    width: 50%;
+    font-size:32rpx;
+    font-weight:500;
+    color: #222222
+}
+
+.list-item-container__right-switch {
+    position: relative;
+    right: -4rpx;
+}
+
+.list-item-container__right-counter {
+    display: flex;
+    align-items: center;
+    font-size:28rpx;
+    color: #555555;
+}
+
+.list-item-container__right-counter icon {
+    width: 41rpx;
+    height: 40rpx;
+    background-size: cover;
+}
+
+.list-item-container__right-counter .middle-times {
+    margin-left: 39rpx;
+    margin-right: 31rpx;
+}
+
+.right-input {
+    text-align: right;
+    font-size: 28rpx;
+    color: #555555;
+}

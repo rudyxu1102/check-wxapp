@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "添加点检"
+  "navigationBarTitleText": "添加点检",
+  "usingComponents": {
+    "form-item": "/components/form-item/form-item",
+    "footer-option": "/components/footer-option/footer-option"
+  }
 }

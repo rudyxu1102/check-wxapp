@@ -1,37 +1,49 @@
 <!--miniprogram/pages/user-center/spot-manage/spot-add/index.wxml-->
 <view class="container">
-  <view class="home-item">
-    <text class="item-title">点检设备</text>
-    <input class="item-desc" placeholder="请输入点检的设备" bindblur='changeInput' key="device"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检要素</text>
-    <input class="item-desc" placeholder="请输入点检要素" bindblur='changeInput' key="factor"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检方法</text>
-    <input class="item-desc" placeholder="请输入点检方法" bindblur='changeInput' key="method"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检类型</text>
-    <input class="item-desc" placeholder='请选择点检类型'  bindblur='changeInput' key="type"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检标准</text>
-    <input class="item-desc" placeholder='请输入点检标准'  bindblur='changeInput' key="standard"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检周期</text>
-    <input class="item-desc" placeholder="请输入点检周期" bindblur='changeInput' key="cycle"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">点检开始日期</text>
-    <input class="item-desc" placeholder="请输入点检开始日期" bindblur='changeInput' key="startDate"></input>
-  </view>
-  <view class="home-item">
-    <text class="item-title">上传检查图片</text>
-    <switch checked="{{imgUpload}}" class="right-switch" color="#3164FF" bindchange="switchChange"/>
-  </view>
-    
-  <view class="footer-btn">完成</view>
+  <form-item tabName="点检设备" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入点检的设备" bindinputChange="changeInput" data-key="device" hasBottomBorder></form-item>
+  <form-item tabName="点检要素" height="114rpx" hasInput="{{true}}" inputValue="{{factor}}" placeholder="请输入点检要素" bindinputChange="changeInput" data-key="factor" hasBottomBorder></form-item>
+  <form-item tabName="点检方法" height="114rpx" hasInput="{{true}}" inputValue="{{method}}" placeholder="请输入点检方法" bindinputChange="changeInput" data-key="method"></form-item>
+  <form-item tabName="点检类型" height="114rpx" marginTop="32rpx">
+    <view slot="right" catchtap='openPicker' class="submit-scope">
+      <text class="right-view">{{checkType === 0 ? '定量' : '定性'}}</text>
+      <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>          
+    </view>
+  </form-item>
+  <form-item wx:if="{{checkType === 0}}" tabName="点检标准" height="114rpx" hasInput="{{true}}" inputValue="{{standard}}" placeholder="请输入点检标准" bindinputChange="changeInput" data-key="standard"></form-item>
+  <form-item wx:if="{{checkType === 1}}" class="radio-content" tabName="点检标准">
+    <icon slot="right" style="background-image:url(/images/form-add.png);" catchtap="addRadioOpt"></icon>
+  </form-item>
+  <form-item wx:if="{{checkType === 1}}" class="radio-content" wx:for="{{options}}" wx:key="{{index}}" hasTopBorder adjustPos>
+    <input slot="left" placeholder="{{'请输入选项' + (index + 1)}}" placeholder-style="color: #999999" value="{{item.value}}" bindblur="updateRadioOpt" data-index="{{index}}" data-key="standard"></input>
+    <icon wx:if="{{options.length > 1}}" slot="right" style="background-image:url(/images/reduce.png);" catchtap="delRadioOpt" data-index="{{index}}"></icon>
+  </form-item>
+  
+  <form-item tabName="点检周期" height="114rpx" hasInput="{{true}}" inputValue="{{cycle ? cycle + '天' : ''}}" placeholder="请输入点检周期（天）" bindinputChange="changeInput" data-key="cycle"  marginTop="32rpx"  hasBottomBorder adjustPos></form-item>
+  
+  <form-item tabName="点检开始日期" height="114rpx">
+    <picker slot="right" mode="date" value="{{startDate}}"  class="submit-scope" bindchange="bindDateChange">
+      <view class="right-view">
+        {{startDate ? startDate : '请选择日期'}}
+      </view>
+      <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>                
+    </picker>
+  </form-item>
+  
+  <form-item tabName="上传检查图片" height="114rpx" hasSwitch="{{true}}" switchCheck="{{imgUpload}}"  bindswitchChange="changeSwitch" data-key="imgUpload"></form-item>
+  <view class="footer-btn" catchtap="addCycleWork">完成</view>
 </view>
+
+<footer-option isShow="{{isShowFooter}}">
+  <view slot="header" class="picker-header">
+      <view catchtap="hidePicker">取消</view>
+      <view catchtap="confirmPicker">完成</view>
+  </view>
+  <view slot="middle">
+      <picker-view indicator-class="picker-select" class="picker-view" value="{{curPickerVal}}" bindchange="bindPickerChange">
+          <picker-view-column>
+              <view style="line-height: 80rpx;">定量</view>
+              <view style="line-height: 80rpx">定性</view>                
+          </picker-view-column>
+      </picker-view>
+  </view>
+</footer-option>

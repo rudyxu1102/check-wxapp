@@ -1,7 +1,76 @@
 /* miniprogram/pages/user-center/spot-manage/spot-add/index.wxss */
-input {
-  flex: 1;
-  width: 100%;
-  height: 100%;
+
+.container {
+  padding-top: 32rpx;
+  padding-bottom: 127rpx;
+  background: #f6f6f6;
+  min-height: 100%;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.submit-scope {
+    position: relative;
+    padding-right: 41rpx;
+    display: flex;
+    align-items: center;
+    font-size:28rpx;
+    color: #555555;
+}
+
+.picker-select {
+    height: 80rpx; 
+}
+
+.picker-view {
+    width: 100%; 
+    height: 421rpx;
+    text-align:center;
+    background: #fff; 
+    color:#555555;
+    font-size:32rpx;
+}
+
+.right-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -20rpx;
+    width: 41rpx;
+    height: 40rpx;
+    background-size: cover;
+}
+
+.picker-header {
+    display: flex;
+    height: 96rpx;
+    line-height: 96rpx;
+    padding: 0 37rpx 0 43rpx;
+    justify-content: space-between;
+    font-size:28rpx;
+    border-bottom: 1rpx solid #F3F3F3;
+}
+
+.picker-header view:nth-child(1) {
+    color: #666666;
+}
+
+.picker-header view:nth-child(2) {
+    color: #3164FF;
+}
+
+.radio-content input {
+    color: #555555;
+}
+
+.radio-content icon {
+    width: 41rpx;
+    height: 40rpx;
+    background-size: cover;
+}
+
+.right-view {
   text-align: right;
+  font-size: 28rpx;
+  color: #555555;
 }

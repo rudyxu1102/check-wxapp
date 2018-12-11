@@ -1,0 +1,22 @@
+<!--左右布局的列表元素布局-->
+<view 
+    class="list-item-container {{hasBottomBorder ? 'bottom-border' : ''}} {{hasTopBorder ? 'top-border' : ''}}" 
+    style="margin-top: {{marginTop}};height: {{height}};{{customStyle}}"
+    catchtap="clickTab">
+    <!-- 左边的文字 -->
+    <text wx:if="{{tabName}}" class="list-item-container__name">{{tabName}}</text>
+    <!-- 左边自定义插槽 -->
+    <slot name="left" wx:if="{{!tabName}}" ></slot>   
+    <!-- 右边开关组件 -->
+    <switch wx:if="{{hasSwitch}}" checked="{{switchCheck}}" class="list-item-container__right-switch" color="#3164FF" bindchange="switchChange"/>
+    <!-- 右边输入框 -->
+    <input wx:if="{{hasInput}}" class="right-input" value="{{inputValue}}" placeholder="{{placeholder}}" bindblur="changeInput" data-key="{{inputKey}}" focus="{{focusInput}}" adjust-position="{{adjustPos}}" cursor-spacing="100"></input>     
+    <!-- 右边的计数器 -->
+    <view wx:if="{{hasCounter}}" class="list-item-container__right-counter">
+        <icon style="background-image:url({{resDomain}}image/wcdWxApp/editor/reduce.png{{resVersion}});{{times <= minTime ? 'opacity:0.3;' : ''}}" catchtap="reduceTimes"></icon>
+        <text class="middle-times">{{times + counterUnit}}</text>
+        <icon style="background-image:url({{resDomain}}image/wcdWxApp/editor/add.png{{resVersion}});{{times >= maxTime ? 'opacity:0.3;' : ''}}" catchtap="addTimes"></icon>        
+    </view>
+    <!-- 右边自定义插槽 -->    
+    <slot name="right"></slot>    
+</view>
