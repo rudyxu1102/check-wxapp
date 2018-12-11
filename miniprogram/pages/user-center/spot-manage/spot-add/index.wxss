@@ -74,3 +74,33 @@
   font-size: 28rpx;
   color: #555555;
 }
+
+.check-person-box {
+  padding-top: 26rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.check-person {
+  padding: 0 25rpx;
+  margin-bottom: 26rpx;
+  margin-right: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius:6rpx;
+  background:#F6F6F6;
+  font-size:24rpx;
+  color:#333333;
+  border: 1rpx solid #f6f6f6;
+  text-align:center;
+  box-sizing: border-box;
+}
+
+.check-person:nth-child(4n) {
+  margin-right: 0;
+}
+
+.check-person.active {
+  color: #3164FF;
+  border: 1rpx solid #3164FF;
+}

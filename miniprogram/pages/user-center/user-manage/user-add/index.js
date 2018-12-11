@@ -103,7 +103,8 @@ Page({
       data: {
         password: password,
         username: this.data.username,
-        account: account
+        account: account,
+        isAdm: 0
       },
       success: res => {
         wx.showToast({

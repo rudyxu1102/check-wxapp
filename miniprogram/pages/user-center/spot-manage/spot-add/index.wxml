@@ -1,4 +1,11 @@
 <!--miniprogram/pages/user-center/spot-manage/spot-add/index.wxml-->
+<wxs module="expander">
+    var idxOf = function(array, item) {
+        return array.indexOf(item);
+    };
+    module.exports.indexOf = idxOf;
+</wxs>
+
 <view class="container">
   <form-item tabName="点检设备" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入点检的设备" bindinputChange="changeInput" data-key="device" hasBottomBorder></form-item>
   <form-item tabName="点检要素" height="114rpx" hasInput="{{true}}" inputValue="{{factor}}" placeholder="请输入点检要素" bindinputChange="changeInput" data-key="factor" hasBottomBorder></form-item>
@@ -18,6 +25,13 @@
     <icon wx:if="{{options.length > 1}}" slot="right" style="background-image:url(/images/reduce.png);" catchtap="delRadioOpt" data-index="{{index}}"></icon>
   </form-item>
   
+  <form-item tabName="选择点检人员" marginTop="32rpx" hasBottomBorder></form-item>
+  <form-item height="auto">
+    <view slot="left" class="check-person-box" catchtap="selectPerson">
+      <view wx:for="{{personList}}" wx:key="index" class="check-person {{expander.indexOf(personIdList, item.id) !== -1 ? 'active' : ''}}" data-id="{{item.id}}">{{item.username}}</view>
+    </view>
+  </form-item>
+
   <form-item tabName="点检周期" height="114rpx" hasInput="{{true}}" inputValue="{{cycle ? cycle + '天' : ''}}" placeholder="请输入点检周期（天）" bindinputChange="changeInput" data-key="cycle"  marginTop="32rpx"  hasBottomBorder adjustPos></form-item>
   
   <form-item tabName="点检开始日期" height="114rpx">

@@ -6,6 +6,7 @@ Page({
    */
   data: {
     checkType: 0,
+    personIdList: [],
     options: [{
       id: 0,
       value: ''
@@ -16,14 +17,60 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    this.getPersonList();
   },
+
+  selectPerson: function (e) {
+    let id = e.target.dataset.id;
+    if (!id) {
+      return
+    }
+    let personIdList = this.data.personIdList.slice();
+    let index = personIdList.indexOf(id);
+    if (index === -1) {
+      personIdList.push(id);      
+    } else {
+      personIdList.splice(index, 1);
+    } 
+    this.setData({
+      'personIdList': personIdList
+    })
+  },
+
+  getPersonList: function () {
+    const db = wx.cloud.database();
+    // 查询当前用户所有的 counters
+    db.collection('user').where({
+      isAdm: 0
+    }).get({
+      success: res => {
+        let personList = [];
+        res.data.forEach((element, index) => {
+          let obj = {
+            id: element._id,
+            username: element.username
+          }
+          personList[index] = obj;
+        })
+        this.setData({
+          personList: personList
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          image: '/images/error.png',
+          title: '查询记录失败'
+        })
+      }
+    })
+  },
+
   openPicker: function () {
     this.setData({
       isShowFooter: true
     })
   },
+
   hidePicker: function () {
     this.setData({
       isShowFooter: false,
@@ -111,6 +158,7 @@ Page({
       let options = this.data.options;
       standard = JSON.stringify(options);
     }
+    console.log(this.data.personIdList)
     let result = {
       device: this.data.device,
       factor: this.data.factor,
@@ -119,7 +167,8 @@ Page({
       standard: standard,
       cycle: this.data.cycle,
       startDate: this.data.startDate,
-      imgUpload: this.data.imgUpload
+      imgUpload: this.data.imgUpload,
+      personList: JSON.stringify(this.data.personIdList)
     }
     const db = wx.cloud.database()
     db.collection('cycleWork').add({

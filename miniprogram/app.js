@@ -8,7 +8,7 @@ App({
       traceUser: true
     })
     this.getOpenid();
-    this.testTimer();
+    // this.testTimer();
   },
   globalData: {
 

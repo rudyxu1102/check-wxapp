@@ -131,6 +131,7 @@ Component({
         },
 
         clickTab: function () {
+          this.triggerEvent('clickEvent');
             if (this.data.hasInput) {
                 this.setData({
                     focusInput: true
