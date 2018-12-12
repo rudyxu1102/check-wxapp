@@ -158,7 +158,6 @@ Page({
       let options = this.data.options;
       standard = JSON.stringify(options);
     }
-    console.log(this.data.personIdList)
     let result = {
       device: this.data.device,
       factor: this.data.factor,

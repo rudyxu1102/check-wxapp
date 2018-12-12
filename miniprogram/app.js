@@ -17,7 +17,6 @@ App({
     wx.cloud.callFunction({
       name: 'test',
       data: {
-        isDebug: isDebug
       },
       success: res => {
         console.log(res)
