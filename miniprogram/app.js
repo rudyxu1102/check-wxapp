@@ -37,7 +37,7 @@ App({
       success: res => {
         wx.setStorageSync('openid', res.result.openid);
         this.globalData.openid = res.result.openid;
-        console.log(res.result.openid)
+        console.log(res.result)
       },
       fail: err => {
         wx.showToast({

@@ -1,33 +1,43 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require('wx-server-sdk');
 cloud.init({
   env: 'test-644476'
 });
 const db = cloud.database();
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}
 // 云函数入口函数
 exports.main = async (event, context) => {
-  let date = new Date();
+  let date = new Date(new Date().getTime() + 28800 * 1000);
+  console.log(date)
   let nowTime = date.getTime();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
   let result = await db.collection('cycleWork').get();
-  result.data.forEach((element) => {
+  await asyncForEach(result.data, async (element) => {
     let startDate = new Date(element.startDate).getTime();
     let cycle = element.cycle - 0;
-    console.log(Math.floor((nowTime - startDate) / (24 * 60 * 60 * 1000)) % cycle)
     if (startDate < nowTime &&  Math.floor((nowTime - startDate) / (24 * 60 * 60 * 1000)) % cycle === 0) {
-      let personList = JSON.parse(element.personList);
-      console.log(1, personList)
-      personList.forEach((item) => {
+      let personList = element.personList;
+      await asyncForEach(personList, async (item) => {
         let work = {
-          personId: item,
+          personId: item.id,
+          _openid: item.openid,
           device: element.device,
           factor: element.factor,
           method: element.method,
           standard: element.standard,
           type: element.type,
-          checkDate: nowTime
+          checkDate: year + '-' + month + '-' + day,
+          done: 0,
+          checkValue: ''
         };
-        db.collection('todayWork').add({
+        await db.collection('todayWork').add({
           data: work,
           success: (res) => {
             console.log('[数据库] [新增记录] 成功，记录 _id: ', res);

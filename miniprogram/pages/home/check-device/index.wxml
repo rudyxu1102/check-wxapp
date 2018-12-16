@@ -1,11 +1,46 @@
 <view class="container">
-  <view class="home-item">
-    <text class="item-title">检查标准</text>
-    <text class="item-desc">xxxxx</text>
-  </view>
-  <view class="home-item">
-    <text class="item-title">检查情况</text>
-    <input class="item-desc" value="hahah" placeholder="请输入检查情况"></input>
-  </view>
-  <view class="footer-btn">完成</view>
+  <form-item tabName="检查状态">
+    <view slot="right" class="right-text">{{workData.done ? '完成' : '未完成'}}</view>
+  </form-item>
+  <view class="form-title">设备基本信息</view>
+  <form-item tabName="设备名字" marginTop="55rpx" hasBottomBorder>
+    <view slot="right" class="right-text">{{workData.device}}</view>
+  </form-item>
+  <form-item tabName="检查要素" hasBottomBorder>
+    <view slot="right" class="right-text">{{workData.factor}}</view>
+  </form-item>
+  <form-item tabName="检查方法" hasBottomBorder>
+    <view slot="right" class="right-text">{{workData.method}}</view>
+  </form-item>
+  <form-item wx:if="{{workData.type === 0}}" tabName="检查标准" hasBottomBorder>
+    <view slot="right" class="right-text">{{workData.standard}}</view>
+  </form-item>
+  <view class="form-title">今日的设备情况</view>
+  <form-item wx:if="{{workData.type === 1 && workData.done === 0}}" tabName="检查情况" height="114rpx" marginTop="55rpx" bindclickEvent="openPicker">
+    <view slot="right" class="submit-scope">
+      <text class="right-view">{{curCheck ? curCheck : '请选择点检的情况'}}</text>
+      <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>          
+    </view>
+  </form-item>
+  <form-item wx:if="{{workData.type === 0 && workData.done === 0}}" tabName="检查情况" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入今日的检查情况" bindinputChange="changeInput"  marginTop="55rpx" hasBottomBorder></form-item>
+  <form-item wx:if="{{workData.done}}" tabName="检查情况" height="114rpx" marginTop="55rpx">
+    <view slot="right" class="right-text">{{workData.checkValue}}</view>
+  </form-item>
+  <view wx:if="{{workData.done === 0}}" class="footer-btn" catchtap="updateData">完成</view>
 </view>
+
+<header-toast isShow="{{isShowTip}}" title="{{tip}}"></header-toast>
+
+<footer-option isShow="{{isShowFooter}}">
+  <view slot="header" class="picker-header">
+    <view catchtap="hidePicker">取消</view>
+    <view catchtap="confirmPicker">完成</view>
+  </view>
+  <view slot="middle">
+    <picker-view indicator-class="picker-select" class="picker-view" value="{{curPickerVal}}" bindchange="bindPickerChange">
+      <picker-view-column>
+          <view wx:for="{{options}}" wx:key="index" style="line-height: 80rpx;">{{item.value}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</footer-option>

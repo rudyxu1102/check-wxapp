@@ -1,5 +1,5 @@
 <view class="home">
-  <navigator wx:for="{{workList}}" wx:key="index" url="/pages/spot-check/check-view/index" class="home-item">
+  <navigator wx:for="{{cycleList}}" wx:key="index" url="/pages/spot-check/check-view/index" class="home-item">
     <text class="item-title">{{item.content}}</text>
     <text class="item-desc">查看点检</text>
   </navigator>

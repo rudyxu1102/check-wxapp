@@ -10,13 +10,14 @@
  * 
  */
 exports.main = (event, context) => {
-  console.log(event)
-  console.log(context)
-
-  // 可执行其他自定义逻辑
-  // console.log 的内容可以在云开发云函数调用日志查看
+  let date = new Date(new Date().getTime() + 28800 * 1000);
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let todayDate = year + '-' + month + '-' + day;
 
   return {
     openid: event.userInfo.openId,
+    todayDate: todayDate
   }
 }

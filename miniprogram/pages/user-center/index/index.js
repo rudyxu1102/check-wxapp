@@ -13,9 +13,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.getUserInfo();
-  },
 
   onShow: function () {
     this.getUserInfo();
@@ -25,27 +22,17 @@ Page({
   getUserInfo: function () {
     const db = wx.cloud.database();
     let loginInfo = wx.getStorageSync('loginInfo');
+    console.log(loginInfo)
     if (!loginInfo) {
       wx.navigateTo({
         url: '/pages/user-center/login/index',
       })
       return
+    } else {
+      this.setData({
+        loginInfo: loginInfo
+      })
     }
-    let userId = loginInfo.userId;
-    db.collection('user').doc(userId).get({
-      success: res => {
-        this.setData({
-          account: res.data.account,
-          username: res.data.username
-        })
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-      }
-    })
   },
 
   // 退出登录 
@@ -66,7 +53,7 @@ Page({
       isShowModal: false
     })
     wx.clearStorage();
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/user-center/login/index',
     })
   }

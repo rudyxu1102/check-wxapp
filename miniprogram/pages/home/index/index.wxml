@@ -1,6 +1,6 @@
 <view class="home">
-  <navigator wx:for="{{workList}}" wx:key="index" url="/pages/home/check-device/index" class="home-item">
-    <text class="item-title">{{item.content}}</text>
-    <text class="item-desc">{{item.status === 1 ? '完成' : '未完成'}}</text>
-  </navigator>
+  <view wx:for="{{workList}}" wx:key="index" class="home-item" catchtap="goCheckPage" data-index="{{index}}">
+    <text class="item-title" data-index="{{index}}">{{'检查' + item.device + '的' + item.factor}}</text>
+    <text class="item-desc" data-index="{{index}}">{{item.done === 1 ? '已完成' : '未完成'}}</text>
+  </view>
 </view>

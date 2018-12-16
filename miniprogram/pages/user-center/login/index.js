@@ -42,7 +42,6 @@ Page({
     }
     let that = this;
     const db = wx.cloud.database();
-    console.log(account, password)
     db.collection('user').where({
       account: account,
       password: password
@@ -50,7 +49,10 @@ Page({
       success: res => {
         if (res.data.length > 0) {
           wx.setStorageSync('loginInfo', {
-            userId: res.data[0]._id
+            userId: res.data[0]._id,
+            isAdm: res.data[0].isAdm,
+            username: res.data[0].username,
+            account: res.data[0].account
           });  
           
           wx.switchTab({

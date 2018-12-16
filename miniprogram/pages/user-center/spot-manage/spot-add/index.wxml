@@ -1,7 +1,13 @@
 <!--miniprogram/pages/user-center/spot-manage/spot-add/index.wxml-->
 <wxs module="expander">
     var idxOf = function(array, item) {
-        return array.indexOf(item);
+      var result = -1;
+      array.forEach(function (element) {
+        if (item === element.id) {
+          result = 1
+        }
+      })
+      return result;
     };
     module.exports.indexOf = idxOf;
 </wxs>
@@ -28,7 +34,7 @@
   <form-item tabName="选择点检人员" marginTop="32rpx" hasBottomBorder></form-item>
   <form-item height="auto">
     <view slot="left" class="check-person-box" catchtap="selectPerson">
-      <view wx:for="{{personList}}" wx:key="index" class="check-person {{expander.indexOf(personIdList, item.id) !== -1 ? 'active' : ''}}" data-id="{{item.id}}">{{item.username}}</view>
+      <view wx:for="{{personList}}" wx:key="index" class="check-person {{expander.indexOf(personIdList, item.id) !== -1 ? 'active' : ''}}" data-id="{{item.id}}" data-openid="{{item.openid}}">{{item.username}}</view>
     </view>
   </form-item>
 

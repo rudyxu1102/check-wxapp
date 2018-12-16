@@ -6,8 +6,8 @@
     </view>
     <view class="user-info">
       <view class="user-name">
-        <view>{{username}}</view>
-        <view class="user-account">帐号：{{account}}</view>
+        <view>{{loginInfo.username}}</view>
+        <view class="user-account">帐号：{{loginInfo.account}}</view>
       </view>
     </view>
   </view>
@@ -22,12 +22,12 @@
       <text class="operate-name">修改密码</text>
       <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
     </navigator>
-    <navigator class="operate" url='/pages/user-center/spot-manage/index/index'>
+    <navigator wx:if="{{loginInfo.isAdm}}" class="operate" url='/pages/user-center/spot-manage/index/index'>
       <icon class="left-icon" style="background-image:url({{resDomain + 'manage/acocuntManage.png'}})"></icon>
       <text class="operate-name">点检管理</text>
       <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
     </navigator>
-    <navigator class="operate" url='/pages/user-center/user-manage/index/index'>
+    <navigator wx:if="{{loginInfo.isAdm}}" class="operate" url='/pages/user-center/user-manage/index/index'>
       <icon class="left-icon" style="background-image:url({{resDomain + 'manage/bought-template.png'}})"></icon>
       <text class="operate-name">用户管理</text>
       <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>

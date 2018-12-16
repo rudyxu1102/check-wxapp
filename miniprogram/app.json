@@ -2,13 +2,6 @@
   "cloud": true,
   "pages": [
     "pages/home/index/index",
-    "pages/demo/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
     "pages/spot-check/index/index",
     "pages/user-center/index/index",
     "pages/user-center/login/index",

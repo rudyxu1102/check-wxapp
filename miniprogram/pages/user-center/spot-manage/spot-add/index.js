@@ -22,13 +22,17 @@ Page({
 
   selectPerson: function (e) {
     let id = e.target.dataset.id;
+    let openid = e.target.dataset.openid;
     if (!id) {
       return
     }
     let personIdList = this.data.personIdList.slice();
     let index = personIdList.indexOf(id);
     if (index === -1) {
-      personIdList.push(id);      
+      personIdList.push({
+        id: id,
+        openid: openid
+      });      
     } else {
       personIdList.splice(index, 1);
     } 
@@ -48,6 +52,7 @@ Page({
         res.data.forEach((element, index) => {
           let obj = {
             id: element._id,
+            openid: element._openid,
             username: element.username
           }
           personList[index] = obj;
@@ -153,11 +158,19 @@ Page({
   },
 
   addCycleWork: function () {
+    if (this.data.loading) {
+      return
+    }
     let standard = this.data.standard;
     if (this.data.checkType === 1) {
       let options = this.data.options;
       standard = JSON.stringify(options);
     }
+    let that = this;
+    this.setData({
+      loading: 1
+    })
+
     let result = {
       device: this.data.device,
       factor: this.data.factor,
@@ -167,7 +180,7 @@ Page({
       cycle: this.data.cycle,
       startDate: this.data.startDate,
       imgUpload: this.data.imgUpload,
-      personList: JSON.stringify(this.data.personIdList)
+      personList: this.data.personIdList
     }
     const db = wx.cloud.database()
     db.collection('cycleWork').add({
@@ -176,6 +189,12 @@ Page({
         wx.showToast({
           title: '新增点检成功',
         })
+        that.data.loading = 0;
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
       },
       fail: err => {
         wx.showToast({
