@@ -27,7 +27,7 @@
     <icon slot="right" style="background-image:url(/images/form-add.png);" catchtap="addRadioOpt"></icon>
   </form-item>
   <form-item wx:if="{{checkType === 1}}" class="radio-content" wx:for="{{options}}" wx:key="{{index}}" hasTopBorder adjustPos>
-    <input slot="left" placeholder="{{'请输入选项' + (index + 1)}}" placeholder-style="color: #999999" value="{{item.value}}" bindblur="updateRadioOpt" data-index="{{index}}" data-key="standard"></input>
+    <input slot="left" placeholder="{{'请输入选项' + (index + 1)}}" placeholder-style="color: #999999" value="{{item}}" bindblur="updateRadioOpt" data-index="{{index}}" data-key="standard"></input>
     <icon wx:if="{{options.length > 1}}" slot="right" style="background-image:url(/images/reduce.png);" catchtap="delRadioOpt" data-index="{{index}}"></icon>
   </form-item>
   

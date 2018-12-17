@@ -1,6 +1,10 @@
-<view class="home">
+<view class="home" wx:if="{{workList.length > 0}}">
   <view wx:for="{{workList}}" wx:key="index" class="home-item" catchtap="goCheckPage" data-index="{{index}}">
     <text class="item-title" data-index="{{index}}">{{'检查' + item.device + '的' + item.factor}}</text>
     <text class="item-desc" data-index="{{index}}">{{item.done === 1 ? '已完成' : '未完成'}}</text>
   </view>
+</view>
+
+<view class="no-check" wx:if="{{workList.length === 0}}">
+  今日无点检任务
 </view>

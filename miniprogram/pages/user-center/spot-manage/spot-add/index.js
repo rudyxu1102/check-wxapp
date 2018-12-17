@@ -7,10 +7,7 @@ Page({
   data: {
     checkType: 0,
     personIdList: [],
-    options: [{
-      id: 0,
-      value: ''
-    }]
+    options: ['']
   },
 
   /**
@@ -102,12 +99,8 @@ Page({
   addRadioOpt: function () {
     if (this.data.options) {
       let length = this.data.options.length;
-      let obj = {
-        id: this.data.options[length - 1].id + 1,
-        value: ''
-      };
       this.setData({
-        [`options[${length}]`]: obj
+        [`options[${length}]`]: ''
       })
     }
   },
@@ -125,7 +118,7 @@ Page({
     let value = e.detail.value;
     let index = parseInt(e.target.dataset.index);
     this.setData({
-      [`options[${index}].value`]: value
+      [`options[${index}]`]: value
     })
   },
   bindDateChange: function (e) {
@@ -164,8 +157,12 @@ Page({
     let standard = this.data.standard;
     if (this.data.checkType === 1) {
       let options = this.data.options;
-      standard = JSON.stringify(options);
+      standard = options;
     }
+    let searchIdList = [];
+    this.data.personIdList.forEach(function (element) {
+      searchIdList.push(element.id)
+    })
     let that = this;
     this.setData({
       loading: 1
@@ -180,7 +177,8 @@ Page({
       cycle: this.data.cycle,
       startDate: this.data.startDate,
       imgUpload: this.data.imgUpload,
-      personList: this.data.personIdList
+      personList: this.data.personIdList,
+      searchIdList: searchIdList
     }
     const db = wx.cloud.database()
     db.collection('cycleWork').add({

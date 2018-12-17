@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cycleList: [
+    // cycleList: [
       // {
       //   content: '检查2#冷料机',
       //   status: 0
@@ -33,35 +33,50 @@ Page({
       //   content: '铲车保养打黄油',
       //   status: 1
       // },
-    ]
+    // ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getCycleList();
+    this.getCycleList();
   },
 
   getCycleList: function () {
     let userInfo = wx.getStorageSync("loginInfo");
     const _ = db.command;
-    db.collection('cycleWork').where({
-      searchIdList: _.in(userInfo.userId)
-    }).get({
+    wx.showLoading();
+    db.collection('cycleWork').get({
       success: res => {
-        // this.setData({
-        //   workList: res.data
-        // })
-        console.log(res.data)
+        let allCycleList = res.data;
+        wx.hideLoading();
+        let cycleList = []
+        allCycleList.forEach(function (element) {
+          if (element.searchIdList.indexOf(userInfo.userId) !== -1) {
+            cycleList.push(element)
+          }
+        })
+        this.setData({
+          cycleList: cycleList
+        })
       },
       fail: err => {
         console.log(err)
+        wx.hideLoading();
         wx.showToast({
           image: '/images/error.png',
           title: '查询记录失败'
         })
       }
+    })
+  },
+
+  goCheckView: function (e) {
+    let index = e.target.dataset.index;
+    let cycleData = this.data.cycleList[index];
+    wx.navigateTo({
+      url: `/pages/spot-check/check-view/index?cycleData=${JSON.stringify(cycleData)}`,
     })
   }
 

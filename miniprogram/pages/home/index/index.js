@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    workList: [
+    // workList: [
       // {
       //   content: '检查2#冷料机',
       //   status: 0
@@ -33,7 +33,7 @@ Page({
       //   content: '铲车保养打黄油',
       //   status: 1
       // },
-    ]
+    // ]
   },
 
   /**
@@ -49,6 +49,9 @@ Page({
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
+    if (!this.data.workList) {
+      wx.showLoading();
+    }
     wx.cloud.callFunction({
       name: 'getCurDate',
     }).then(res => {
@@ -58,12 +61,13 @@ Page({
         checkDate: todayDate
       }).get({
         success: res => {
+          wx.hideLoading();
           this.setData({
             workList: res.data
           })
-          console.log(res.data)
         },
         fail: err => {
+          wx.hideLoading();
           wx.showToast({
             image: '/images/error.png',
             title: '查询记录失败'

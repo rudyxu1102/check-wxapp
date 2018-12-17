@@ -41,3 +41,11 @@
   font-size: 28rpx;
   color: #555;
 }
+
+.no-check {
+  position: relative;
+  top: 40%;
+  margin: 0rpx 48rpx 0rpx;
+  padding-bottom: 18rpx;
+  text-align: center;
+}

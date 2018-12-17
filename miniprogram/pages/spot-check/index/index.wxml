@@ -1,6 +1,10 @@
-<view class="home">
-  <navigator wx:for="{{cycleList}}" wx:key="index" url="/pages/spot-check/check-view/index" class="home-item">
-    <text class="item-title">{{item.content}}</text>
-    <text class="item-desc">查看点检</text>
-  </navigator>
+<view class="home" wx:if="{{cycleList.length > 0}}">
+  <view wx:for="{{cycleList}}" wx:key="index" class="home-item" catchtap="goCheckView" data-index="{{index}}">
+    <text class="item-title" data-index="{{index}}">{{'检查' + item.device + '的' + item.factor}}</text>
+    <text class="item-desc" data-index="{{index}}">查看点检</text>
+  </view>
+</view>
+
+<view class="no-check" wx:if="{{cycleList.length === 0}}">
+  无点检任务
 </view>
