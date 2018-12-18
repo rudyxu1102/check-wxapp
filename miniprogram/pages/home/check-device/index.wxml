@@ -23,11 +23,17 @@
     </view>
   </form-item>
   <form-item wx:if="{{workData.type === 0 && workData.done === 0}}" tabName="检查情况" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入今日的检查情况" bindinputChange="changeInput"  marginTop="55rpx" hasBottomBorder></form-item>
-  <form-item wx:if="{{workData.done}}" tabName="检查情况" height="114rpx" marginTop="55rpx" hasBottomBorder="{{}}">
+  <form-item wx:if="{{workData.done}}" tabName="检查情况" height="114rpx" marginTop="55rpx" hasBottomBorder="{{workData.imgUpload}}">
     <view slot="right" class="right-text">{{workData.checkValue}}</view>
   </form-item>
-  <form-item wx:if="{{workData.done}}" tabName="上传照片" height="114rpx">
-    <view slot="right" class="right-text">{{workData.checkValue}}</view>
+  <form-item wx:if="{{workData.imgUpload}}" tabName="{{workData.done ? '现场照片' : '上传照片'}}" height="114rpx">
+    <view wx:if="{{workData.done === 0}}" slot="right" class="submit-scope" catchtap="uploadImg">
+      <text class="right-view">{{imgFileId ? '更换照片' : '选择照片'}}</text>
+      <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>          
+    </view>
+  </form-item>
+  <form-item wx:if="{{workData.imgUpload && (imgFileId || workData.imgFileId)}}" height="300rpx" customStyle="margin-bottom: 100rpx">
+    <view wx:if="{{tempFilePath}}" slot="left" class="view-image" style="background-image: url({{tempFilePath + resVersion}})"></view>
   </form-item>
   <view wx:if="{{workData.done === 0}}" class="footer-btn" catchtap="updateData">完成</view>
 </view>
@@ -42,7 +48,7 @@
   <view slot="middle">
     <picker-view indicator-class="picker-select" class="picker-view" value="{{curPickerVal}}" bindchange="bindPickerChange">
       <picker-view-column>
-          <view wx:for="{{options}}" wx:key="index" style="line-height: 80rpx;">{{item.value}}</view>
+          <view wx:for="{{options}}" wx:key="index" style="line-height: 80rpx;">{{item}}</view>
       </picker-view-column>
     </picker-view>
   </view>

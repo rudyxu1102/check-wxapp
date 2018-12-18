@@ -39,6 +39,7 @@ exports.main = async (event, context) => {
           imgUpload: element.imgUpload,
           checkValue: ''
         };
+        console.log(work)
         await db.collection('todayWork').add({
           data: work,
           success: (res) => {

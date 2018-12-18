@@ -11,7 +11,7 @@ App({
     // this.testTimer();
   },
   globalData: {
-
+    resVersion: '?v=20181219'
   },
   testTimer: function () {
     wx.cloud.callFunction({
