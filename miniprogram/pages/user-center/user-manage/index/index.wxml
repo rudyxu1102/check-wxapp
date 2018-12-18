@@ -1,6 +1,6 @@
 <!--pages/usercenter/myAccount/myAccount.wxml-->
 <view class="user-center-options">
-  <navigator class="operate" url='/pages/user-center/user-manage/user-add/index'>
+  <navigator class="operate" url='/pages/user-center/user-manage/user-add/index?state=1'>
     <icon class="left-icon" style="background-image:url({{resDomain + 'manage/change-account.png'}})"></icon>
     <text class="operate-name">添加用户</text>
     <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>

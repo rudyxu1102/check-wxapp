@@ -1,21 +1,32 @@
-<view class="loginPage">
-  <view class="section inputSection">
-    <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
-    <input placeholder="用户帐号" value="{{account}}" type="text" bindblur="toAccountBlur" focus="{{!accountCanUse}}"/>
-  </view>
-  <view class="section inputSection">
-    <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
-    <input placeholder="用户名称" value="{{username}}" type="text" bindblur="toUsernameBlur" focus/>
-  </view>
-  <view class="section inputSection">
-    <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
-    <input placeholder="登录密码" value="{{password}}" type="password" bindblur="toPasswordBlur" />
-  </view>
-  <view class="section inputSection">
-    <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
-    <input placeholder="请再次输入登录密码" value="{{secPas}}" type="password" bindblur="toSecPasswordBlur" />
-  </view>
-  <button class="faiscoLoginBtn" bindtap='addUser'> 注册 </button>
+<view class="loginPage" wx:if="{{state === 1}}">
+    <view class="section inputSection">
+        <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
+        <input placeholder="用户帐号" value="{{account}}" type="text" bindblur="toAccountBlur" focus="{{!accountCanUse}}" />
+    </view>
+    <view class="section inputSection">
+        <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
+        <input placeholder="公司识别码" value="{{code}}" type="text" bindblur="toCodeBlur" />
+    </view>
+    <view class="section inputSection">
+        <label class='inputIcon' style='background-image:url({{resDomain}}/username.png);'></label>
+        <input placeholder="用户名称" value="{{username}}" type="text" bindblur="toUsernameBlur" focus/>
+    </view>
+    <view class="section inputSection">
+        <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
+        <input placeholder="登录密码" value="{{password}}" type="password" bindblur="toPasswordBlur" />
+    </view>
+    <view class="section inputSection">
+        <label class='inputIcon' style='background-image:url({{resDomain}}/lock.png);'></label>
+        <input placeholder="请再次输入登录密码" value="{{secPas}}" type="password" bindblur="toSecPasswordBlur" />
+    </view>
+    <button class="faiscoLoginBtn" bindtap='addUser'> 注册 </button>
+</view>
+
+<view class="success-tip" wx:if="{{state === 2}}">
+  <icon style='background-image:url({{resDomain}}successIcon.png);'></icon>
+  <view class="success-text">注册成功！</view>
+  <view class="success-text">该账号已与您的微信号绑定在一起。</view>  
+  <view class="back-btn" catchtap="goUserCenter">返回</view>
 </view>
 
 <header-toast isShow="{{isShowTip}}" title="{{tip}}"></header-toast>

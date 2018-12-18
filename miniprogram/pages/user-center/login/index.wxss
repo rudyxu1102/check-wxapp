@@ -74,3 +74,11 @@ input::-webkit-input-placeholder {
     justify-content: space-between;
     align-items: center;
 }
+
+.other-options {
+    display: flex;
+    justify-content: space-between;
+    color:#666;
+    font-size:28rpx;
+    margin-top:10rpx;
+}

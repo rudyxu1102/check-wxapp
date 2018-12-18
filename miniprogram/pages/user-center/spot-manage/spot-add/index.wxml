@@ -41,9 +41,17 @@
   <form-item tabName="点检周期" height="114rpx" hasInput="{{true}}" inputValue="{{cycle ? cycle + '天' : ''}}" placeholder="请输入点检周期（天）" bindinputChange="changeInput" data-key="cycle"  marginTop="32rpx"  hasBottomBorder adjustPos></form-item>
   
   <form-item tabName="点检开始日期" height="114rpx">
-    <picker slot="right" mode="date" value="{{startDate}}"  class="submit-scope" bindchange="bindDateChange">
+    <picker slot="right" mode="date" value="{{startDate}}"  class="submit-scope" bindchange="bindDateChange" data-key="startDate">
       <view class="right-view">
         {{startDate ? startDate : '请选择日期'}}
+      </view>
+      <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>                
+    </picker>
+  </form-item>
+    <form-item tabName="点检开始日期" height="114rpx">
+    <picker slot="right" mode="date" value="{{endDate}}"  class="submit-scope" bindchange="bindDateChange" data-key="endDate">
+      <view class="right-view">
+        {{endDate ? endDate : '请选择日期'}}
       </view>
       <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>                
     </picker>

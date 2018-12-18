@@ -122,8 +122,9 @@ Page({
     })
   },
   bindDateChange: function (e) {
+    let key = e.target.dataset.key;
     this.setData({
-      startDate: e.detail.value
+      [key]: e.detail.value
     })
   },
   changeInput: function (e) {
@@ -176,6 +177,7 @@ Page({
       standard: standard,
       cycle: this.data.cycle,
       startDate: this.data.startDate,
+      endDate: this.data.endDate,      
       imgUpload: this.data.imgUpload,
       personList: this.data.personIdList,
       searchIdList: searchIdList
@@ -201,5 +203,10 @@ Page({
         })
       }
     })
+  },
+
+  makeTodayWork: function () {
+    // let nowTime = new Date();
+    // let endDate = new
   }
 })

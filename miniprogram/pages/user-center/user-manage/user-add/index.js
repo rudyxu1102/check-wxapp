@@ -11,6 +11,11 @@ Page({
     account: '',
     password: ''
   },
+  onLoad: function (options) {
+    this.setData({
+      state: parseInt(options.state)
+    })
+  },
   toAccountBlur: function (e) {
     let value = e.detail.value;
     this.setData({
@@ -64,6 +69,7 @@ Page({
     this.checkAccount(value);
     let password = md5(this.data.password);
     let account = this.data.account;
+    let that = this;
     if (!account) {
       this.setData({
         isShowTip: true,
@@ -92,6 +98,13 @@ Page({
       })
       return
     }
+    if (!this.data.code) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入公司识别码'
+      })
+      return
+    }
     if (this.data.password !== this.data.secPas) {
       this.setData({
         isShowTip: true,
@@ -104,13 +117,16 @@ Page({
         password: password,
         username: this.data.username,
         account: account,
+        code: this.data.code,
         isAdm: 0
       },
       success: res => {
         wx.showToast({
           title: '添加用户成功',
         })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        wx.navigateTo({
+          url: '/pages/user-center/user-manage/user-add/index?state=2',
+        })
       },
       fail: err => {
         wx.showToast({
@@ -118,6 +134,17 @@ Page({
           title: '添加失败'
         })
       }
+    })
+  },
+  toCodeBlur: function () {
+    let value = e.detail.value;
+    this.setData({
+      code: value
+    })
+  },
+  goUserCenter: function () {
+    wx.navigateTo({
+      url: '/pages/user-center/login/index',
     })
   }
 })

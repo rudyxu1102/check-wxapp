@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "登录",
+  "navigationBarTitleText": "账号管理",
   "usingComponents": {
     "header-toast": "/components/header-toast/header-toast"
   }

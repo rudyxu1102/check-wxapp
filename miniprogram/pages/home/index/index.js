@@ -49,8 +49,17 @@ Page({
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
+    let loginInfo = wx.getStorageSync('loginInfo');
+    if (!loginInfo) {
+        wx.navigateTo({
+            url: '/pages/user-center/login/index',
+        })
+        return
+    }
     if (!this.data.workList) {
-      wx.showLoading();
+      wx.showLoading({
+          title: '正在加载中...'
+      });
     }
     wx.cloud.callFunction({
       name: 'getCurDate',

@@ -15,7 +15,7 @@ App({
   },
   testTimer: function () {
     wx.cloud.callFunction({
-      name: 'test',
+      name: 'cycleWork',
       data: {
       },
       success: res => {

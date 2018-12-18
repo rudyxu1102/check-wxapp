@@ -8,6 +8,10 @@
     <input placeholder="请输入密码" value="{{password}}" type="password" bindinput="toPasswordBlur" />
   </view>
   <button class="faiscoLoginBtn" bindtap='onLogin'> 登录 </button>
+  <view class="other-options">
+    <navigator url='/pages/user-center/change-password/index'>修改密码</navigator>
+    <navigator url='/pages/user-center/user-manage/user-add/index?state=1'>注册账号</navigator>
+  </view>
 </view>
 
 <header-toast isShow="{{isShowTip}}" title="{{tip}}"></header-toast>

@@ -46,7 +46,16 @@ Page({
   getCycleList: function () {
     let userInfo = wx.getStorageSync("loginInfo");
     const _ = db.command;
-    wx.showLoading();
+    let loginInfo = wx.getStorageSync('loginInfo');
+    if (!loginInfo) {
+        wx.navigateTo({
+            url: '/pages/user-center/login/index',
+        })
+        return
+    }
+    wx.showLoading({
+        title: '正在加载中...'
+    });
     db.collection('cycleWork').get({
       success: res => {
         let allCycleList = res.data;

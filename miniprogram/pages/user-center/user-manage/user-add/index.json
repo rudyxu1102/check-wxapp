@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "添加用户",
+  "navigationBarTitleText": "注册账号",
   "usingComponents": {
     "header-toast": "/components/header-toast/header-toast"
   }

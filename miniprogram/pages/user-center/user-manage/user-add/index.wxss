@@ -74,3 +74,37 @@ input::-webkit-input-placeholder {
     justify-content: space-between;
     align-items: center;
 }
+
+.success-tip {
+  text-align: center;
+}
+
+.success-tip icon {
+  display: inline-block;
+  margin: 80rpx auto 20rpx;
+  width: 120rpx;
+  height: 120rpx;
+  background-size: cover;
+}
+
+.success-text {
+    margin: 10rpx 0;
+    font-size:28rpx;
+    color:#888;
+    text-align: center;
+}
+
+.back-btn {
+    margin-top: 90rpx;
+    margin-bottom: 34rpx;
+    margin-left: 70rpx;
+    margin-right: 70rpx;      
+    height: 94rpx;
+    line-height: 94rpx;
+    background-color: #3164ff;
+    color: #fff;
+    border-radius: 6rpx;
+    font-size: 32rpx;
+    box-sizing: border-box;
+    box-shadow:0rpx 8rpx 20rpx 0rpx rgba(80,104,235,0.3);
+}

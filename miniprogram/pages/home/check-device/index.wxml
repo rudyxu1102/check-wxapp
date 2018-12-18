@@ -23,7 +23,10 @@
     </view>
   </form-item>
   <form-item wx:if="{{workData.type === 0 && workData.done === 0}}" tabName="检查情况" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入今日的检查情况" bindinputChange="changeInput"  marginTop="55rpx" hasBottomBorder></form-item>
-  <form-item wx:if="{{workData.done}}" tabName="检查情况" height="114rpx" marginTop="55rpx">
+  <form-item wx:if="{{workData.done}}" tabName="检查情况" height="114rpx" marginTop="55rpx" hasBottomBorder="{{}}">
+    <view slot="right" class="right-text">{{workData.checkValue}}</view>
+  </form-item>
+  <form-item wx:if="{{workData.done}}" tabName="上传照片" height="114rpx">
     <view slot="right" class="right-text">{{workData.checkValue}}</view>
   </form-item>
   <view wx:if="{{workData.done === 0}}" class="footer-btn" catchtap="updateData">完成</view>
