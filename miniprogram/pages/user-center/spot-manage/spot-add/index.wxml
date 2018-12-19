@@ -14,6 +14,7 @@
 
 <view class="container">
   <form-item tabName="点检设备" height="114rpx" hasInput="{{true}}" inputValue="{{device}}" placeholder="请输入点检的设备" bindinputChange="changeInput" data-key="device" hasBottomBorder></form-item>
+   <form-item tabName="设备部位" height="114rpx" hasInput="{{true}}" inputValue="{{part}}" placeholder="请输入点检的设备" bindinputChange="changeInput" data-key="part" hasBottomBorder></form-item>
   <form-item tabName="点检要素" height="114rpx" hasInput="{{true}}" inputValue="{{factor}}" placeholder="请输入点检要素" bindinputChange="changeInput" data-key="factor" hasBottomBorder></form-item>
   <form-item tabName="点检方法" height="114rpx" hasInput="{{true}}" inputValue="{{method}}" placeholder="请输入点检方法" bindinputChange="changeInput" data-key="method"></form-item>
   <form-item tabName="点检类型" height="114rpx" marginTop="32rpx">
@@ -31,8 +32,10 @@
     <icon wx:if="{{options.length > 1}}" slot="right" style="background-image:url(/images/reduce.png);" catchtap="delRadioOpt" data-index="{{index}}"></icon>
   </form-item>
   
-  <form-item tabName="选择点检人员" marginTop="32rpx" hasBottomBorder></form-item>
-  <form-item height="auto">
+  <form-item tabName="选择点检人员" marginTop="32rpx" hasBottomBorder>
+    <view slot="right" wx:if="{{personList.length === 0}}" class="right-view">暂无点检人员</view>
+  </form-item>
+  <form-item height="auto" wx:if="{{personList.length > 0}}"> 
     <view slot="left" class="check-person-box" catchtap="selectPerson">
       <view wx:for="{{personList}}" wx:key="index" class="check-person {{expander.indexOf(personIdList, item.id) !== -1 ? 'active' : ''}}" data-id="{{item.id}}" data-openid="{{item.openid}}">{{item.username}}</view>
     </view>

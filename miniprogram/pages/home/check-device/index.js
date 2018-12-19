@@ -1,6 +1,7 @@
 // miniprogram/pages/home/check-device/index.js
 const db = wx.cloud.database();
 let globalData = getApp().globalData;
+const formatTime = require('../../../utils/util.js').formatTime;
 Page({
 
   /**
@@ -31,7 +32,8 @@ Page({
       workData: workData
     }
     if (workData.type === 1) {
-      temData['options'] = workData.standard
+      temData['options'] = workData.standard,
+      temData['curPickerVal'] = workData.standard[0]
     }
     if (workData.imgFileId) {
       wx.cloud.downloadFile({
@@ -50,7 +52,14 @@ Page({
   bindPickerChange: function (e) {
     let value = e.detail.value;
     this.setData({
-      curCheck: this.data.options[value[0]].value
+      curCheck: this.data.options[value[0]],
+      curPickerVal: this.data.options[value[0]]
+    })
+  },
+  changeCurCheck: function (e) {
+    this.setData({
+      curCheck: this.data.curPickerVal,
+      isShowFooter: false
     })
   },
   openPicker: function () {
@@ -68,9 +77,7 @@ Page({
 
   uploadImg: function () {
     let name = this.data.workData.device + '-' + this.data.workData.factor + '-' + this.data.workData._id + '.png'
-    wx.showLoading({
-      title: '正在上传中...',
-    })
+
     wx.chooseImage({
       success: chooseResult => {
         wx.cloud.uploadFile({
@@ -80,6 +87,9 @@ Page({
             if (res.statusCode === 200) {
               let fileID = res.fileID;
               console.log(res)
+              wx.showLoading({
+                title: '正在上传中...',
+              })
               wx.cloud.downloadFile({
                 fileID: res.fileID, // 文件 ID
                 success: res => {
@@ -87,6 +97,8 @@ Page({
                     icon: 'success',
                     title: '上传成功',
                   })
+                  wx.hideLoading();
+
                   // 返回临时文件路径
                   this.setData({
                     imgFileId: fileID,
@@ -97,6 +109,9 @@ Page({
 
             }
           },
+          fail: function () {
+            wx.hideLoading();
+          }
         })
       },
     })
@@ -115,12 +130,12 @@ Page({
     wx.cloud.callFunction({
       name: 'getCurDate',
     }).then(res => {
-      let todayDate = res.result.todayDate
+      let curTime = res.result.curTime;
       db.collection('todayWork').doc(id).update({
         data: {
           done: 1,
           checkValue: that.data.curCheck,
-          actDate: todayDate,
+          actDate: formatTime(curTime, 1),
           imgFileId: this.data.imgFileId
         },
         success(res) {

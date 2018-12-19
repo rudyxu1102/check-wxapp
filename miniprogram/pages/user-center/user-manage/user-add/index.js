@@ -15,6 +15,23 @@ Page({
     this.setData({
       state: parseInt(options.state)
     })
+    this.getCodeList();
+  },
+  // 获取所有的公司识别码
+  getCodeList: function () {
+    let codeList = [];
+    let that = this;
+    db.collection('company').get({
+      success: function (res) {
+        res.data.forEach((element) => {
+          codeList.push(element.code)
+        })
+        that.setData({
+          codeList: codeList
+        })
+      }
+    })
+
   },
   toAccountBlur: function (e) {
     let value = e.detail.value;
@@ -112,6 +129,13 @@ Page({
       })
       return
     }
+    if (this.data.codeList.indexOf(value) === -1) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入正确的公司识别码'
+      })
+      return
+    } 
     db.collection('user').add({
       data: {
         password: password,
@@ -130,14 +154,20 @@ Page({
       },
       fail: err => {
         wx.showToast({
-          icon: 'none',
+          image: '/images/error.png',
           title: '添加失败'
         })
       }
     })
   },
-  toCodeBlur: function () {
-    let value = e.detail.value;
+  toCodeBlur: function (e) {
+    let value = e.detail.value - 0;
+    if (value && this.data.codeList.indexOf(value) === -1) {
+      this.setData({
+        isShowTip: true,
+        tip: '请输入正确的公司识别码'
+      })
+    } 
     this.setData({
       code: value
     })

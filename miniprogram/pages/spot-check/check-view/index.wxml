@@ -4,6 +4,10 @@
     <text class="item-desc">{{cycleData.device}}</text>
   </view>
   <view class="home-item">
+    <text class="item-title">设备部位</text>
+    <text class="item-desc">{{cycleData.part}}</text>
+  </view>
+  <view class="home-item">
     <text class="item-title">点检要素</text>
     <text class="item-desc">{{cycleData.factor}}</text>
   </view>
@@ -27,4 +31,8 @@
     <text class="item-title">点检开始日期</text>
     <text class="item-desc">{{cycleData.startDate}}</text>
   </view>
+   <view class="home-item">
+    <text class="item-title">点检开始日期</text>
+    <text class="item-desc">{{cycleData.endDate}}</text>
+  </view> 
 </view>

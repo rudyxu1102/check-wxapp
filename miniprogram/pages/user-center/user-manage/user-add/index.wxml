@@ -25,7 +25,8 @@
 <view class="success-tip" wx:if="{{state === 2}}">
   <icon style='background-image:url({{resDomain}}successIcon.png);'></icon>
   <view class="success-text">注册成功！</view>
-  <view class="success-text">该账号已与您的微信号绑定在一起。</view>  
+  <view class="success-text">该账号已与您的微信号绑定在一起，请在此微信下使用您的账号。</view>  
+
   <view class="back-btn" catchtap="goUserCenter">返回</view>
 </view>
 

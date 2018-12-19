@@ -1,4 +1,6 @@
 // miniprogram/pages/user-center/spot-manage/spot-add/index.js
+const db = wx.cloud.database();
+
 Page({
 
   /**
@@ -39,10 +41,12 @@ Page({
   },
 
   getPersonList: function () {
-    const db = wx.cloud.database();
+    let userInfo = wx.getStorageSync('loginInfo');
+    let company = userInfo.company - 0;
     // 查询当前用户所有的 counters
     db.collection('user').where({
-      isAdm: 0
+      isAdm: 0,
+      company: company
     }).get({
       success: res => {
         let personList = [];
@@ -168,12 +172,15 @@ Page({
     this.setData({
       loading: 1
     })
-
+    wx.showLoading({
+      title: '添加中...',
+    })
     let result = {
       device: this.data.device,
       factor: this.data.factor,
       method: this.data.method,
       type: this.data.checkType,
+      part: this.data.part,
       standard: standard,
       cycle: this.data.cycle,
       startDate: this.data.startDate,
@@ -190,11 +197,13 @@ Page({
           title: '新增点检成功',
         })
         that.data.loading = 0;
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
+        wx.hideLoading();
+        that.makeTodayWork(result);
+        // setTimeout(function () {
+        //   wx.navigateBack({
+        //     delta: 1
+        //   })
+        // }, 1000)
       },
       fail: err => {
         wx.showToast({
@@ -205,8 +214,14 @@ Page({
     })
   },
 
-  makeTodayWork: function () {
-    // let nowTime = new Date();
-    // let endDate = new
+  makeTodayWork: function (element) {
+    wx.cloud.callFunction({
+      name: 'addTodayWork',
+      data: {
+        element: element
+      }
+    }).then(res => {
+        console.log(res)
+    })
   }
 })

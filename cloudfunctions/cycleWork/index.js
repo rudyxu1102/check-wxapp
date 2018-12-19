@@ -1,4 +1,4 @@
-// 云函数入口文件
+// 定时周期性生成今日任务
 const cloud = require('wx-server-sdk');
 cloud.init({
   env: 'test-644476'
@@ -12,7 +12,7 @@ async function asyncForEach(array, callback) {
 }
 // 云函数入口函数
 exports.main = async (event, context) => {
-  let date = new Date(new Date().getTime() + 28800 * 1000);
+  let date = new Date();
   console.log(date)
   let nowTime = date.getTime();
   let year = date.getFullYear();
@@ -33,10 +33,12 @@ exports.main = async (event, context) => {
           factor: element.factor,
           method: element.method,
           standard: element.standard,
+          part: element.part,
           type: element.type,
           checkDate: year + '-' + month + '-' + day,
           done: 0,
           imgUpload: element.imgUpload,
+          actDate: '',
           checkValue: ''
         };
         console.log(work)

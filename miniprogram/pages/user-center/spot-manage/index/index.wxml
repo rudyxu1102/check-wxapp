@@ -5,7 +5,7 @@
             <text class="operate-name">添加点检</text>
             <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
         </navigator>
-        <view class="operate" catchtap='quitLogin'>
+        <!-- <view class="operate" catchtap='quitLogin'>
             <icon class="left-icon" style="background-image:url({{resDomain + 'manage/quit.png'}})"></icon>
             <text class="operate-name">删除点检</text>
             <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
@@ -14,5 +14,5 @@
             <icon class="left-icon" style="background-image:url({{resDomain + 'manage/quit.png'}})"></icon>
             <text class="operate-name">查询点检</text>
             <icon class="right-icon" style="background-image:url({{ resDomain + 'manage/nextPage.png'}})"></icon>
-        </view>
+        </view> -->
 </view>

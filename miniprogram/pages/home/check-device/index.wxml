@@ -6,6 +6,9 @@
   <form-item tabName="设备名字" marginTop="55rpx" hasBottomBorder>
     <view slot="right" class="right-text">{{workData.device}}</view>
   </form-item>
+  <form-item tabName="设备部位" hasBottomBorder>
+    <view slot="right" class="right-text">{{workData.part}}</view>
+  </form-item>
   <form-item tabName="检查要素" hasBottomBorder>
     <view slot="right" class="right-text">{{workData.factor}}</view>
   </form-item>
@@ -31,6 +34,7 @@
       <text class="right-view">{{imgFileId ? '更换照片' : '选择照片'}}</text>
       <icon class="right-icon" style="background-image:url(/images/nextPage.png);"></icon>          
     </view>
+    <view wx:if="{{workData.imgUpload && !workData.imgFileId}}" slot="right" class="right-text">无</view>
   </form-item>
   <form-item wx:if="{{workData.imgUpload && (imgFileId || workData.imgFileId)}}" height="300rpx" customStyle="margin-bottom: 100rpx">
     <view wx:if="{{tempFilePath}}" slot="left" class="view-image" style="background-image: url({{tempFilePath + resVersion}})"></view>
@@ -43,7 +47,7 @@
 <footer-option isShow="{{isShowFooter}}">
   <view slot="header" class="picker-header">
     <view catchtap="hidePicker">取消</view>
-    <view catchtap="confirmPicker">完成</view>
+    <view catchtap="confirmPicker" catchtap='changeCurCheck'>完成</view>
   </view>
   <view slot="middle">
     <picker-view indicator-class="picker-select" class="picker-view" value="{{curPickerVal}}" bindchange="bindPickerChange">

@@ -52,7 +52,8 @@ Page({
             userId: res.data[0]._id,
             isAdm: res.data[0].isAdm,
             username: res.data[0].username,
-            account: res.data[0].account
+            account: res.data[0].account,
+            company: res.data[0].company
           });  
           
           wx.switchTab({
